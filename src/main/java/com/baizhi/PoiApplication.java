@@ -12,6 +12,7 @@ public class PoiApplication {
         System.out.println("im zhansan");
         System.out.println("小轩在不在");
         System.out.println("在下卢本伟");
+        System.out.println("遥控车，玩具车");
     }
 
 }
