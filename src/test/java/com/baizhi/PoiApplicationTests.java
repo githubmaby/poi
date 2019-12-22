@@ -20,50 +20,53 @@ import java.util.Date;
 @SpringBootTest
 public class PoiApplicationTests {
 
+    // 创建一个空表
+    // 测试成功
     @Test
     public void contextLoads() {
-        //创建工作薄
+        // 创建工作薄
         HSSFWorkbook workbook = new HSSFWorkbook();
-        //通过工作薄创建工作表
+        // 通过工作薄创建工作表
         HSSFSheet sheet = workbook.createSheet("测试");
-        //通过工作表创建行
+        // 通过工作表创建行
         HSSFRow row = sheet.createRow(0);
-        //通过行创建单元格
+        // 通过行创建单元格
         HSSFCell cell = row.createCell(0);
-        //给单元格赋值
+        // 给单元格赋值
         cell.setCellValue("第一个单元格");
 
-        //把这个文件导出
-
+        // 把这个文件导出
         try {
             workbook.write(new FileOutputStream(new File("D:/a.xls")));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
+    // 写入
+    // 测试成功
     @Test
     public void test1() {
-        //创建工作薄
+        // 创建工作薄
         HSSFWorkbook workbook = new HSSFWorkbook();
-        //通过工作薄创建工作表
+        // 通过工作薄创建工作表
         HSSFSheet sheet = workbook.createSheet("测试");
-        //设置单元格宽度
+        // 设置单元格宽度
         sheet.setColumnWidth(2, 15 * 256);
 
-        //设置日期格式
+        // 设置日期格式
         HSSFDataFormat dataFormat = workbook.createDataFormat();
         short format = dataFormat.getFormat("yyyy年mm月dd号");
-        //把日期格式交给样式对象
+
+        // 把日期格式交给样式对象
         HSSFCellStyle cellStyle = workbook.createCellStyle();
         cellStyle.setDataFormat(format);
 
-        //创建单元格样式对象
+        // 创建单元格样式对象
         HSSFCellStyle fontStyle = workbook.createCellStyle();
         fontStyle.setAlignment(HorizontalAlignment.CENTER);
-        //创建字体样式对象
+
+        // 创建字体样式对象
         HSSFFont font = workbook.createFont();
         font.setBold(true);
         font.setColor(Font.COLOR_RED);
@@ -71,7 +74,7 @@ public class PoiApplicationTests {
         font.setFontName("楷体");
         fontStyle.setFont(font);
 
-        //创建标题行
+        // 创建标题行
         HSSFRow tiltRow = sheet.createRow(0);
         String[] str = {"id", "姓名", "生日"};
         for (int i = 0; i < str.length; i++) {
@@ -79,7 +82,8 @@ public class PoiApplicationTests {
             cell.setCellStyle(fontStyle);
             cell.setCellValue(str[i]);
         }
-        //填充内容
+
+        // 填充内容
         User user = new User("1", "大飞", new Date());
         User user2 = new User("2", "小陈", new Date());
         User user3 = new User("3", "嫖老湿", new Date());
@@ -94,14 +98,14 @@ public class PoiApplicationTests {
             row.createCell(0).setCellValue(users.get(i).getId());
             row.createCell(1).setCellValue(users.get(i).getName());
             HSSFCell cell = row.createCell(2);
-            //将样式对象设置到当前单元格中
+
+            // 将样式对象设置到当前单元格中
             cell.setCellStyle(cellStyle);
             cell.setCellValue(users.get(i).getBir());
         }
 
-
         try {
-            workbook.write(new FileOutputStream(new File("D:/a.xls")));
+            workbook.write(new FileOutputStream(new File("D:/b.xls")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -109,10 +113,12 @@ public class PoiApplicationTests {
 
     }
 
+    // 读入
+    // 测试成功
     @Test
     public void poiIn() {
         try {
-            HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(new File("D:/a.xls")));
+            HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(new File("D:/b.xls")));
             HSSFSheet sheet = workbook.getSheet("测试");
             int lastRowNum = sheet.getLastRowNum();
             for (int i = 1; i <= lastRowNum; i++) {
