@@ -17,8 +17,10 @@ public class PoiApplication {
         System.out.println();
         System.out.println("jafla"); // idea 自动执行添加操作
 
+        System.out.println("this is old de");
 
         // commit Ctrl + K
+        // Alt + 9 --- 打开git的控制台
     }
 
 }
