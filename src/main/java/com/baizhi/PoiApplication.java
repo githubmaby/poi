@@ -18,6 +18,8 @@ public class PoiApplication {
         System.out.println("jafla"); // idea 自动执行添加操作
         System.out.println("官网上的修改");
 
+        System.out.println("this is new de");
+
         // commit Ctrl + K
     }
 
